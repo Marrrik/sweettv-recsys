@@ -1,0 +1,114 @@
+{
+ "results": {
+  "binary": {
+   "all": 0.35385442514474774,
+   "test users": 0.39148405797101454,
+   "best iteration": 138,
+   "seconds": 46
+  },
+  "lambdarank": {
+   "all": 0.35661538461538456,
+   "test users": 0.3956202898550724,
+   "best iteration": 98,
+   "seconds": 44
+  },
+  "poisson": {
+   "all": 0.351010752688172,
+   "test users": 0.3877014492753623,
+   "best iteration": 554,
+   "seconds": 117
+  },
+  "habit x schedule feature alone": {
+   "all": 0.33659057071960297,
+   "test users": 0.3770463768115942
+  }
+ },
+ "ensembles": {
+  "binary + lambdarank": {
+   "all": 0.3554441687344913,
+   "test users": 0.39347536231884056
+  },
+  "binary + poisson": {
+   "all": 0.3536526054590571,
+   "test users": 0.39082608695652177
+  },
+  "lambdarank + poisson": {
+   "all": 0.35478163771712157,
+   "test users": 0.3916782608695652
+  },
+  "all three": {
+   "all": 0.3568312655086849,
+   "test users": 0.3946608695652174
+  }
+ },
+ "best_iterations": {
+  "binary": 138,
+  "lambdarank": 98,
+  "poisson": 554
+ },
+ "importance": {
+  "rank_habit_exposure": 0.31662,
+  "hs": 0.21446,
+  "rank_cf_habit": 0.12056,
+  "n_half": 0.03823,
+  "habit_exposure": 0.02759,
+  "pop_q_per_user": 0.02572,
+  "rank_cf_rules": 0.02128,
+  "cf_rules": 0.01848,
+  "u_q_total": 0.01294,
+  "airing_ratio": 0.01137,
+  "win_airings": 0.01027,
+  "u_lab_hours": 0.01026,
+  "win_airings_user_channels": 0.00967,
+  "sec_sum": 0.00871,
+  "cf_content": 0.00862,
+  "rank_cf_content": 0.00845,
+  "rank_cf_ppr": 0.00839,
+  "pop_top5": 0.0066,
+  "weeks_since_last": 0.00634,
+  "frac_mean": 0.00614,
+  "n_touch": 0.00614,
+  "rank_hs": 0.006,
+  "touch_rate": 0.00572,
+  "cf_ppr": 0.00553,
+  "win_slot_min": 0.00526,
+  "cf_als": 0.0052,
+  "rank_hs_p0": 0.00491,
+  "weeks_since_first": 0.00488,
+  "hist_airings": 0.00484,
+  "u_q_programmes": 0.00442,
+  "exposure": 0.00441,
+  "habit_exposure_hist": 0.00432,
+  "category": 0.00419,
+  "year": 0.00406,
+  "hs_p0": 0.00395,
+  "frac_max": 0.0039,
+  "rank_n_qw": 0.00359,
+  "rank_cf_als": 0.00358,
+  "u_active_days": 0.0029,
+  "pop_q_users": 0.00289,
+  "weeks_since_last_q": 0.00251,
+  "u_q_5th": 0.0025,
+  "q_last2": 0.00208,
+  "pop_q_last4": 0.00206,
+  "cf_habit": 0.0019,
+  "q_per_habit": 0.00186,
+  "n_qw": 0.00127,
+  "hs_p3": 0.0011,
+  "q_rate": 0.00096,
+  "win_channels": 0.00087,
+  "q_last1": 0.00064,
+  "q_last4": 0.00029,
+  "src_rules": 0.00023,
+  "n_channels_watched": 0.00013,
+  "n_q": 0.0001,
+  "src_pop": 3e-05,
+  "src_habit": 2e-05,
+  "src_content": 2e-05,
+  "src_ppr": 2e-05,
+  "u_active_last_week": 1e-05,
+  "src_als": 0.0,
+  "src_touched": 0.0,
+  "new_programme": 0.0
+ }
+}

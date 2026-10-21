@@ -1,0 +1,14 @@
+ref,fileName,date,description,status,publicScore,privateScore
+57496966,ranker_v3.csv,2026-10-21 20:55:39.667000,"LightGBM re-ranker v3 (E4): v2 + habit coverage features, binary + lambdarank, 3 seeds, trained on S14 S16 S18 S21 S26",SubmissionStatus.COMPLETE,0.45244,0.44757
+57496351,als.csv,2026-10-21 20:25:04.950000,"implicit ALS, 32 factors, alpha 1, reg 30 (extended grid)",SubmissionStatus.COMPLETE,0.36794,0.36427
+57496344,ranker_v2.csv,2026-10-21 20:24:57.660000,"LightGBM re-ranker v2 (E3): top-60 candidates, regularised params, binary + lambdarank blend, trained on S14 S16 S18 S21 S26",SubmissionStatus.COMPLETE,0.45041,0.44534
+57495995,content.csv,2026-10-21 20:08:27.780000,content-based TF-IDF profile,SubmissionStatus.COMPLETE,0.09622,0.08950
+57495993,rules.csv,2026-10-21 20:08:23.907000,"association rules, max confidence, min support 30",SubmissionStatus.COMPLETE,0.33741,0.34068
+57495990,als.csv,2026-10-21 20:08:18.823000,"implicit ALS, 32 factors, alpha 3, reg 100",SubmissionStatus.COMPLETE,0.36469,0.35854
+57495988,ppr.csv,2026-10-21 20:08:14.700000,"personalised PageRank, count weighting, alpha 0.5",SubmissionStatus.COMPLETE,0.40855,0.39635
+57495987,ranker_poisson.csv,2026-10-21 20:08:10.883000,LightGBM poisson re-ranker; trained on S16+S21,SubmissionStatus.COMPLETE,0.43942,0.43501
+57495985,ranker_binary.csv,2026-10-21 20:08:06.710000,LightGBM binary re-ranker; trained on S16+S21,SubmissionStatus.COMPLETE,0.44585,0.44587
+57495982,ranker_lambdarank.csv,2026-10-21 20:07:59.617000,LightGBM lambdarank re-ranker; trained on S16+S21,SubmissionStatus.COMPLETE,0.44959,0.44969
+57495979,ranker_ensemble.csv,2026-10-21 20:07:56.030000,"LightGBM re-ranker, reciprocal-rank blend of binary, lambdarank, poisson; trained on S16+S21",SubmissionStatus.COMPLETE,0.44846,0.44843
+57493700,popularity.csv,2026-10-21 18:37:12.560000,"popularity baseline: history top-5 membership, airing in weeks 31-42",SubmissionStatus.COMPLETE,0.32330,0.31620
+57493694,habit_schedule.csv,2026-10-21 18:36:56.363000,"habit x schedule, half-life 10 weeks, prior 30",SubmissionStatus.COMPLETE,0.42188,0.41561

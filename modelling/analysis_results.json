@@ -1,0 +1,976 @@
+{
+ "map5": {
+  "Popularity": 0.23409429280397023,
+  "Habit x schedule": 0.33659057071960297,
+  "ALS": 0.28319023986765923,
+  "PPR": 0.31839950372208436,
+  "Association rules": 0.2544780810587262,
+  "Content-based": 0.08535483870967743,
+  "Hybrid (LightGBM re-ranker)": 0.35949710504549215
+ },
+ "bootstrap": {
+  "Popularity": {
+   "MAP@5": 0.23409429280397023,
+   "hybrid minus method": 0.12540281224152192,
+   "ci low": 0.11917177419354838,
+   "ci high": 0.131913482216708,
+   "users where hybrid is higher": 2396,
+   "users where hybrid is lower": 730
+  },
+  "Habit x schedule": {
+   "MAP@5": 0.33659057071960297,
+   "hybrid minus method": 0.022906534325889166,
+   "ci low": 0.01967311827956989,
+   "ci high": 0.026126736972704716,
+   "users where hybrid is higher": 1452,
+   "users where hybrid is lower": 849
+  },
+  "ALS": {
+   "MAP@5": 0.28319023986765923,
+   "hybrid minus method": 0.07630686517783292,
+   "ci low": 0.07169023986765921,
+   "ci high": 0.08118165839536806,
+   "users where hybrid is higher": 2139,
+   "users where hybrid is lower": 703
+  },
+  "PPR": {
+   "MAP@5": 0.31839950372208436,
+   "hybrid minus method": 0.04109760132340778,
+   "ci low": 0.0378039288668321,
+   "ci high": 0.04451457816377171,
+   "users where hybrid is higher": 1726,
+   "users where hybrid is lower": 711
+  },
+  "Association rules": {
+   "MAP@5": 0.2544780810587262,
+   "hybrid minus method": 0.10501902398676592,
+   "ci low": 0.09967315963606285,
+   "ci high": 0.11077772952853598,
+   "users where hybrid is higher": 2302,
+   "users where hybrid is lower": 714
+  },
+  "Content-based": {
+   "MAP@5": 0.08535483870967743,
+   "hybrid minus method": 0.2741422663358148,
+   "ci low": 0.266906141439206,
+   "ci high": 0.2818043010752688,
+   "users where hybrid is higher": 3334,
+   "users where hybrid is lower": 103
+  },
+  "Hybrid (LightGBM re-ranker)": {
+   "MAP@5": 0.35949710504549215,
+   "hybrid minus method": 0.0,
+   "ci low": 0.0,
+   "ci high": 0.0,
+   "users where hybrid is higher": 0,
+   "users where hybrid is lower": 0
+  }
+ },
+ "segments": {
+  "light": {
+   "Popularity": 0.1479811507936508,
+   "Habit x schedule": 0.2117311507936508,
+   "ALS": 0.19018601190476192,
+   "PPR": 0.19288442460317462,
+   "Association rules": 0.16460069444444445,
+   "Content-based": 0.07920882936507936,
+   "Hybrid (LightGBM re-ranker)": 0.2399454365079365
+  },
+  "medium": {
+   "Popularity": 0.22759245470340037,
+   "Habit x schedule": 0.3337577562670638,
+   "ALS": 0.2888458674609084,
+   "PPR": 0.31701911144204514,
+   "Association rules": 0.25180441796971953,
+   "Content-based": 0.089379498634897,
+   "Hybrid (LightGBM re-ranker)": 0.3571605857532887
+  },
+  "heavy": {
+   "Popularity": 0.3267733929014644,
+   "Habit x schedule": 0.46437577562670634,
+   "ALS": 0.370608091337801,
+   "PPR": 0.44538843385455446,
+   "Association rules": 0.3470960536113179,
+   "Content-based": 0.08748076445768181,
+   "Hybrid (LightGBM re-ranker)": 0.4814743112434847
+  },
+  "test users": {
+   "Popularity": 0.2591942028985508,
+   "Habit x schedule": 0.3770463768115942,
+   "ALS": 0.3064231884057971,
+   "PPR": 0.35717971014492755,
+   "Association rules": 0.2793449275362319,
+   "Content-based": 0.08990434782608696,
+   "Hybrid (LightGBM re-ranker)": 0.39598260869565216
+  }
+ },
+ "properties": {
+  "share watched at 0.8 before": {
+   "Popularity": 0.5972704714640199,
+   "Habit x schedule": 0.9577171215880893,
+   "ALS": 0.867741935483871,
+   "PPR": 0.9647642679900744,
+   "Association rules": 0.6990570719602978,
+   "Content-based": 0.3525062034739454,
+   "Hybrid (LightGBM re-ranker)": 0.8326550868486352
+  },
+  "share only touched before": {
+   "Popularity": 0.2173697270471464,
+   "Habit x schedule": 0.01578163771712159,
+   "ALS": 0.06446650124069479,
+   "PPR": 0.011563275434243176,
+   "Association rules": 0.17930521091811413,
+   "Content-based": 0.13459057071960298,
+   "Hybrid (LightGBM re-ranker)": 0.12119106699751861
+  },
+  "share new to the user": {
+   "Popularity": 0.18535980148883374,
+   "Habit x schedule": 0.026501240694789083,
+   "ALS": 0.06779156327543424,
+   "PPR": 0.02367245657568238,
+   "Association rules": 0.1216377171215881,
+   "Content-based": 0.5129032258064516,
+   "Hybrid (LightGBM re-ranker)": 0.046153846153846156
+  },
+  "precision on familiar": {
+   "Popularity": 0.3580871154431922,
+   "Habit x schedule": 0.3971757748776509,
+   "ALS": 0.3668015332197615,
+   "PPR": 0.37894576322879076,
+   "Association rules": 0.3522232894513814,
+   "Content-based": 0.3141110545084055,
+   "Hybrid (LightGBM re-ranker)": 0.4297086368366285
+  },
+  "precision on new": {
+   "Popularity": 0.0680053547523427,
+   "Habit x schedule": 0.15730337078651685,
+   "ALS": 0.09297218155197658,
+   "PPR": 0.15723270440251572,
+   "Association rules": 0.06487148102815178,
+   "Content-based": 0.00996613449443638,
+   "Hybrid (LightGBM re-ranker)": 0.13870967741935483
+  },
+  "distinct programmes": {
+   "Popularity": 5.0,
+   "Habit x schedule": 482.0,
+   "ALS": 78.0,
+   "PPR": 730.0,
+   "Association rules": 35.0,
+   "Content-based": 576.0,
+   "Hybrid (LightGBM re-ranker)": 176.0
+  },
+  "catalogue coverage of the pool": {
+   "Popularity": 0.0007841907151819323,
+   "Habit x schedule": 0.07559598494353827,
+   "ALS": 0.012233375156838143,
+   "PPR": 0.11449184441656211,
+   "Association rules": 0.005489335006273526,
+   "Content-based": 0.0903387703889586,
+   "Hybrid (LightGBM re-ranker)": 0.027603513174404015
+  },
+  "mean popularity (share of users with it in their top 5)": {
+   "Popularity": 0.33678991943813263,
+   "Habit x schedule": 0.21966209840162837,
+   "ALS": 0.26797774181759093,
+   "PPR": 0.22259717067254833,
+   "Association rules": 0.3127261301445521,
+   "Content-based": 0.11195487469264548,
+   "Hybrid (LightGBM re-ranker)": 0.246143717614688
+  },
+  "mean shared with the popularity top 5": {
+   "Popularity": 5.0,
+   "Habit x schedule": 2.431761786600496,
+   "ALS": 2.895285359801489,
+   "PPR": 2.3543424317617867,
+   "Association rules": 3.8503722084367245,
+   "Content-based": 1.1977667493796527,
+   "Hybrid (LightGBM re-ranker)": 2.7610421836228287
+  },
+  "category share Инфо": {
+   "Popularity": 0.8,
+   "Habit x schedule": 0.45543424317617864,
+   "ALS": 0.54,
+   "PPR": 0.43786600496277917,
+   "Association rules": 0.7011910669975187,
+   "Content-based": 0.530074441687345,
+   "Hybrid (LightGBM re-ranker)": 0.5032258064516129
+  },
+  "category share Фильмы": {
+   "Popularity": 0.0,
+   "Habit x schedule": 0.030620347394540944,
+   "ALS": 0.0031265508684863524,
+   "PPR": 0.058213399503722084,
+   "Association rules": 0.0,
+   "Content-based": 0.047692307692307694,
+   "Hybrid (LightGBM re-ranker)": 0.004267990074441687
+  }
+ },
+ "user_a": 3525695269081370558,
+ "user_b": 14049050536217794294,
+ "examples": {
+  "A": {
+   "user_id": 3525695269081370558,
+   "hours_w11_20": 349.52194444444444,
+   "programmes_watched_w11_20": 47,
+   "history_top": [
+    [
+     12001682,
+     32
+    ],
+    [
+     12001734,
+     16
+    ],
+    [
+     2400480,
+     10
+    ],
+    [
+     12002856,
+     9
+    ],
+    [
+     2400508,
+     8
+    ],
+    [
+     2400467,
+     7
+    ],
+    [
+     400357,
+     5
+    ],
+    [
+     6500479,
+     4
+    ]
+   ],
+   "actual_top5_w21_30": [
+    12001682,
+    12002856,
+    12001734,
+    2400508,
+    2400467
+   ],
+   "ap5": {
+    "Popularity": 0.2866666666666666,
+    "Habit x schedule": 0.76,
+    "ALS": 0.16666666666666666,
+    "PPR": 0.6433333333333333,
+    "Association rules": 0.2866666666666666,
+    "Content-based": 0.0,
+    "Hybrid (LightGBM re-ranker)": 0.71
+   },
+   "filled_by_method": {
+    "Popularity": 0,
+    "Habit x schedule": 5,
+    "ALS": 5,
+    "PPR": 5,
+    "Association rules": 5,
+    "Content-based": 5
+   },
+   "s21_lists": {
+    "Popularity": [
+     [
+      2400480,
+      "watched",
+      false
+     ],
+     [
+      240081,
+      "watched",
+      false
+     ],
+     [
+      2400467,
+      "watched",
+      true
+     ],
+     [
+      2400508,
+      "watched",
+      true
+     ],
+     [
+      12001682,
+      "watched",
+      true
+     ]
+    ],
+    "Habit x schedule": [
+     [
+      12001682,
+      "watched",
+      true
+     ],
+     [
+      12002856,
+      "watched",
+      true
+     ],
+     [
+      12001734,
+      "watched",
+      true
+     ],
+     [
+      2400480,
+      "watched",
+      false
+     ],
+     [
+      2400508,
+      "watched",
+      true
+     ]
+    ],
+    "ALS": [
+     [
+      2400480,
+      "watched",
+      false
+     ],
+     [
+      240081,
+      "watched",
+      false
+     ],
+     [
+      12001682,
+      "watched",
+      true
+     ],
+     [
+      2400467,
+      "watched",
+      true
+     ],
+     [
+      20088,
+      "watched",
+      false
+     ]
+    ],
+    "PPR": [
+     [
+      12001682,
+      "watched",
+      true
+     ],
+     [
+      2400480,
+      "watched",
+      false
+     ],
+     [
+      12001734,
+      "watched",
+      true
+     ],
+     [
+      2400508,
+      "watched",
+      true
+     ],
+     [
+      2400467,
+      "watched",
+      true
+     ]
+    ],
+    "Association rules": [
+     [
+      2400480,
+      "watched",
+      false
+     ],
+     [
+      240081,
+      "watched",
+      false
+     ],
+     [
+      2400467,
+      "watched",
+      true
+     ],
+     [
+      2400508,
+      "watched",
+      true
+     ],
+     [
+      12001682,
+      "watched",
+      true
+     ]
+    ],
+    "Content-based": [
+     [
+      5900319,
+      "new",
+      false
+     ],
+     [
+      12002720,
+      "new",
+      false
+     ],
+     [
+      12002904,
+      "new",
+      false
+     ],
+     [
+      120079707,
+      "new",
+      false
+     ],
+     [
+      120082346,
+      "new",
+      false
+     ]
+    ],
+    "Hybrid (LightGBM re-ranker)": [
+     [
+      12001682,
+      "watched",
+      true
+     ],
+     [
+      12002856,
+      "watched",
+      true
+     ],
+     [
+      2400480,
+      "watched",
+      false
+     ],
+     [
+      2400508,
+      "watched",
+      true
+     ],
+     [
+      2400467,
+      "watched",
+      true
+     ]
+    ]
+   },
+   "s31_lists": {
+    "Popularity": [
+     2400480,
+     240081,
+     2400508,
+     2400467,
+     12001682
+    ],
+    "Habit x schedule": [
+     12001682,
+     12002856,
+     12001734,
+     2400508,
+     2400480
+    ],
+    "ALS": [
+     2400467,
+     2400480,
+     12001682,
+     240081,
+     2400508
+    ],
+    "PPR": [
+     12001682,
+     12001734,
+     12002856,
+     2400508,
+     2400480
+    ],
+    "Association rules": [
+     240081,
+     2400480,
+     2400508,
+     2400467,
+     12001682
+    ],
+    "Content-based": [
+     5900319,
+     12002720,
+     12002904,
+     120079707,
+     120080185
+    ],
+    "Hybrid (LightGBM re-ranker)": [
+     12001682,
+     12001734,
+     2400508,
+     12002856,
+     2400480
+    ]
+   }
+  },
+  "B": {
+   "user_id": 14049050536217794294,
+   "hours_w11_20": 59.17166666666667,
+   "programmes_watched_w11_20": 14,
+   "history_top": [
+    [
+     2500413,
+     2
+    ],
+    [
+     200337,
+     1
+    ],
+    [
+     400335,
+     1
+    ],
+    [
+     400361,
+     1
+    ],
+    [
+     1000381,
+     1
+    ],
+    [
+     240081,
+     1
+    ],
+    [
+     1000723,
+     1
+    ],
+    [
+     1100411,
+     1
+    ]
+   ],
+   "actual_top5_w21_30": [
+    90082736,
+    90072084,
+    90057266,
+    1000381,
+    90055475
+   ],
+   "ap5": {
+    "Popularity": 0.0,
+    "Habit x schedule": 0.0,
+    "ALS": 0.0,
+    "PPR": 0.0,
+    "Association rules": 0.0,
+    "Content-based": 0.0,
+    "Hybrid (LightGBM re-ranker)": 0.0
+   },
+   "filled_by_method": {
+    "Popularity": 0,
+    "Habit x schedule": 5,
+    "ALS": 5,
+    "PPR": 5,
+    "Association rules": 5,
+    "Content-based": 5
+   },
+   "s21_lists": {
+    "Popularity": [
+     [
+      2400480,
+      "touched",
+      false
+     ],
+     [
+      240081,
+      "watched",
+      false
+     ],
+     [
+      2400467,
+      "watched",
+      false
+     ],
+     [
+      2400508,
+      "touched",
+      false
+     ],
+     [
+      12001682,
+      "touched",
+      false
+     ]
+    ],
+    "Habit x schedule": [
+     [
+      2500413,
+      "watched",
+      false
+     ],
+     [
+      2400467,
+      "watched",
+      false
+     ],
+     [
+      240081,
+      "watched",
+      false
+     ],
+     [
+      10003012,
+      "watched",
+      false
+     ],
+     [
+      1100411,
+      "watched",
+      false
+     ]
+    ],
+    "ALS": [
+     [
+      240081,
+      "watched",
+      false
+     ],
+     [
+      2400467,
+      "watched",
+      false
+     ],
+     [
+      2500413,
+      "watched",
+      false
+     ],
+     [
+      400361,
+      "watched",
+      false
+     ],
+     [
+      2400480,
+      "touched",
+      false
+     ]
+    ],
+    "PPR": [
+     [
+      2500413,
+      "watched",
+      false
+     ],
+     [
+      2400467,
+      "watched",
+      false
+     ],
+     [
+      400361,
+      "watched",
+      false
+     ],
+     [
+      240081,
+      "watched",
+      false
+     ],
+     [
+      400335,
+      "watched",
+      false
+     ]
+    ],
+    "Association rules": [
+     [
+      240081,
+      "watched",
+      false
+     ],
+     [
+      2400480,
+      "touched",
+      false
+     ],
+     [
+      2400467,
+      "watched",
+      false
+     ],
+     [
+      2400508,
+      "touched",
+      false
+     ],
+     [
+      20088,
+      "new",
+      false
+     ]
+    ],
+    "Content-based": [
+     [
+      5900319,
+      "new",
+      false
+     ],
+     [
+      5900347,
+      "new",
+      false
+     ],
+     [
+      2500413,
+      "watched",
+      false
+     ],
+     [
+      2400480,
+      "touched",
+      false
+     ],
+     [
+      2400467,
+      "watched",
+      false
+     ]
+    ],
+    "Hybrid (LightGBM re-ranker)": [
+     [
+      2400467,
+      "watched",
+      false
+     ],
+     [
+      2400480,
+      "touched",
+      false
+     ],
+     [
+      240081,
+      "watched",
+      false
+     ],
+     [
+      500331,
+      "touched",
+      false
+     ],
+     [
+      10002893,
+      "watched",
+      false
+     ]
+    ]
+   },
+   "s31_lists": {
+    "Popularity": [
+     2400480,
+     240081,
+     2400508,
+     2400467,
+     12001682
+    ],
+    "Habit x schedule": [
+     2500413,
+     12002793,
+     6500479,
+     2400467,
+     1000381
+    ],
+    "ALS": [
+     240081,
+     2400467,
+     2400480,
+     1100411,
+     500331
+    ],
+    "PPR": [
+     1000381,
+     6500479,
+     2500413,
+     90057266,
+     6700512
+    ],
+    "Association rules": [
+     240081,
+     2400480,
+     2400508,
+     2400467,
+     12001682
+    ],
+    "Content-based": [
+     10002027,
+     10001336,
+     10002007,
+     10002197,
+     10002677
+    ],
+    "Hybrid (LightGBM re-ranker)": [
+     2400480,
+     2400508,
+     500331,
+     240081,
+     2400467
+    ]
+   }
+  },
+  "programmes": {
+   "20088": {
+    "title": "'Завтрак с 1+1'. Информационно-развлекательная программа.",
+    "category": "Развлечения"
+   },
+   "200337": {
+    "title": "'Утро с 'Интером'.",
+    "category": "Развлечения"
+   },
+   "240081": {
+    "title": "Факты. День.",
+    "category": "Инфо"
+   },
+   "400335": {
+    "title": "'Хата на тата', 7 сезон, 1 эп.",
+    "category": "Развлечения"
+   },
+   "400357": {
+    "title": "'Холостяк', 10 сезон, 1 эп., 1 ч.",
+    "category": "Развлечения"
+   },
+   "400361": {
+    "title": "'МастерШеф', 7 сезон, 17 эп.",
+    "category": "Познавательное"
+   },
+   "500331": {
+    "title": "'Один за всех'.",
+    "category": "Развлечения"
+   },
+   "1000381": {
+    "title": "Т/с 'CSI: Место преступления', 7 сезон, 6 и 7 с.",
+    "category": "Сериалы"
+   },
+   "1000723": {
+    "title": "Т/с 'Охотники за древностями', 3 сезон, 14 и 15 с.",
+    "category": "Сериалы"
+   },
+   "1100411": {
+    "title": "Премьера. 'Вещдок. Особый случай. Око за око'.",
+    "category": "Познавательное"
+   },
+   "2400467": {
+    "title": "'Викна-Новости'.",
+    "category": "Инфо"
+   },
+   "2400480": {
+    "title": "'ТСН. Неделя'.",
+    "category": "Инфо"
+   },
+   "2400508": {
+    "title": "Сегодня. Итоги с Олегом Панютой.",
+    "category": "Инфо"
+   },
+   "2500413": {
+    "title": "Гражданская оборона.",
+    "category": "Инфо"
+   },
+   "5900319": {
+    "title": "Абзац!",
+    "category": "Инфо"
+   },
+   "5900347": {
+    "title": "'Деньги'.",
+    "category": "Инфо"
+   },
+   "6500479": {
+    "title": "'Мир наизнанку. Бразилия', 36 эп.",
+    "category": "Познавательное"
+   },
+   "6700512": {
+    "title": "Громкое дело.",
+    "category": "Другое"
+   },
+   "10001336": {
+    "title": "Т/с 'Кости', 2 сезон, 2 с. 'Мать и дитя в бухте'.",
+    "category": "Сериалы"
+   },
+   "10002007": {
+    "title": "Т/с 'Виктория-победительница', 1 сезон, 1 с. 'Пилот'.",
+    "category": "Сериалы"
+   },
+   "10002027": {
+    "title": "Т/с 'Дело Дойлов', 1 с.",
+    "category": "Сериалы"
+   },
+   "10002197": {
+    "title": "Т/с 'Держись, Чарли!'.",
+    "category": "Сериалы"
+   },
+   "10002677": {
+    "title": "Т/с 'Дочки-матери', 1-7 с.",
+    "category": "Сериалы"
+   },
+   "10002893": {
+    "title": "Т/с 'Когда мы дома'.",
+    "category": "Сериалы"
+   },
+   "10003012": {
+    "title": "Т/с 'Однажды в Одессе'.",
+    "category": "Сериалы"
+   },
+   "12001682": {
+    "title": "М/с 'Губка Боб Квадратные Штаны'.",
+    "category": "Детям"
+   },
+   "12001734": {
+    "title": "М/с 'Волшебные покровители', 154 с. 'Хочу это вырезать / Мэрский день'.",
+    "category": "Детям"
+   },
+   "12002720": {
+    "title": "М/с 'Соник Бум'.",
+    "category": "Детям"
+   },
+   "12002793": {
+    "title": "М/с 'Фиксики'.",
+    "category": "Детям"
+   },
+   "12002856": {
+    "title": "М/с 'Элвин и бурундуки'.",
+    "category": "Детям"
+   },
+   "12002904": {
+    "title": "М/с 'Рыцари Нексо Найтс'.",
+    "category": "Детям"
+   },
+   "90055475": {
+    "title": "Х/ф 'Парк Юрского периода 3'.",
+    "category": "Фильмы"
+   },
+   "90057266": {
+    "title": "Х/ф 'Терминатор 3: Восстание машин'.",
+    "category": "Фильмы"
+   },
+   "90072084": {
+    "title": "Х/ф 'РЭД'.",
+    "category": "Фильмы"
+   },
+   "90082736": {
+    "title": "Х/ф 'Человек-паук. Вдали от дома'.",
+    "category": "Фильмы"
+   },
+   "120079707": {
+    "title": "М/ф 'Король обезьян'.",
+    "category": "Детям"
+   },
+   "120080185": {
+    "title": "М/ф 'Приключения красного самолетика'.",
+    "category": "Детям"
+   },
+   "120082346": {
+    "title": "М/ф 'Муми-тролли и зимняя сказка'.",
+    "category": "Детям"
+   }
+  }
+ }
+}

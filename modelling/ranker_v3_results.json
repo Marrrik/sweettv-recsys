@@ -1,0 +1,133 @@
+{
+ "results": {
+  "E3 binary": {
+   "all": 0.3554474772539289,
+   "test users": 0.39191014492753623,
+   "best iteration": 918,
+   "seconds": 54
+  },
+  "E3 lambdarank": {
+   "all": 0.35721836228287845,
+   "test users": 0.39394202898550723,
+   "best iteration": 361,
+   "seconds": 35
+  },
+  "E3 binary + lambdarank": {
+   "all": 0.3574193548387097,
+   "test users": 0.3934869565217391
+  },
+  "E4 binary": {
+   "all": 0.35665343258891646,
+   "test users": 0.3922434782608696,
+   "best iteration": 699,
+   "seconds": 46
+  },
+  "E4 lambdarank": {
+   "all": 0.3587948717948718,
+   "test users": 0.39547246376811596,
+   "best iteration": 357,
+   "seconds": 38
+  },
+  "E4 binary + lambdarank": {
+   "all": 0.35863275434243175,
+   "test users": 0.39478840579710145
+  },
+  "E4 binary + lambdarank, 3 seeds": {
+   "all": 0.35949710504549215,
+   "test users": 0.39598260869565216
+  }
+ },
+ "selected": "E4 binary + lambdarank, 3 seeds",
+ "seeds": [
+  0,
+  1,
+  2
+ ],
+ "final_snapshots": [
+  "S14",
+  "S16",
+  "S18",
+  "S21",
+  "S26"
+ ],
+ "param_set": "regularised",
+ "iterations": {
+  "E3 binary seed 0": 918,
+  "E3 lambdarank seed 0": 361,
+  "E4 binary seed 0": 699,
+  "E4 lambdarank seed 0": 357,
+  "E4 binary seed 1": 1048,
+  "E4 lambdarank seed 1": 377,
+  "E4 binary seed 2": 1028,
+  "E4 lambdarank seed 2": 565
+ },
+ "importance": {
+  "rank_habit_exposure": 0.42099,
+  "rank_cf_habit": 0.21745,
+  "habit_cov": 0.09346,
+  "rank_cf_ppr": 0.03668,
+  "pop_top5": 0.02988,
+  "rank_hs": 0.02438,
+  "rank_cf_als": 0.02119,
+  "win_airings": 0.01726,
+  "n_touch": 0.01217,
+  "habit_recent_cov": 0.01148,
+  "u_q_total": 0.01005,
+  "n_half": 0.0092,
+  "rank_cf_rules": 0.009,
+  "win_airings_user_channels": 0.00893,
+  "pop_q_users": 0.00771,
+  "rank_hs_p0": 0.00599,
+  "hist_airings": 0.00437,
+  "airing_ratio": 0.0039,
+  "category": 0.00377,
+  "pop_q_last4": 0.00376,
+  "u_q_5th": 0.00366,
+  "year": 0.00317,
+  "hs": 0.00263,
+  "pop_q_per_user": 0.00248,
+  "win_slot_min": 0.00243,
+  "src_pop": 0.00237,
+  "weeks_since_last": 0.00229,
+  "cf_rules": 0.00208,
+  "cf_content": 0.00205,
+  "cf_habit": 0.00203,
+  "u_lab_hours": 0.00195,
+  "frac_mean": 0.00184,
+  "hs_p0": 0.0017,
+  "habit_exposure": 0.00161,
+  "sec_sum": 0.00157,
+  "cf_als": 0.00116,
+  "touch_rate": 0.00113,
+  "rank_cf_content": 0.00108,
+  "exposure": 0.00102,
+  "frac_max": 0.00102,
+  "u_active_days": 0.00099,
+  "weeks_since_first": 0.00096,
+  "weeks_since_last_q": 0.00082,
+  "u_q_programmes": 0.00079,
+  "q_per_cov": 0.00069,
+  "rank_n_qw": 0.00067,
+  "cf_ppr": 0.00057,
+  "habit_exposure_hist": 0.00053,
+  "hs_p3": 0.00051,
+  "habit_cov_hist": 0.00041,
+  "win_channels": 0.00038,
+  "q_rate": 0.00036,
+  "q_per_habit": 0.0003,
+  "q_last2": 0.0003,
+  "q_last1": 0.0002,
+  "n_qw": 0.00015,
+  "src_habit": 0.00014,
+  "q_last4": 0.00014,
+  "n_channels_watched": 8e-05,
+  "n_q": 6e-05,
+  "u_active_last_week": 2e-05,
+  "src_als": 1e-05,
+  "src_content": 1e-05,
+  "src_rules": 1e-05,
+  "src_ppr": 0.0,
+  "src_touched": 0.0,
+  "new_programme": 0.0
+ }
+}

@@ -1,0 +1,428 @@
+{
+ "selected": {
+  "half_life_weeks": 10.0,
+  "prior": 30.0
+ },
+ "grid": [
+  {
+   "half-life, weeks": "none",
+   "schedule": false,
+   "prior": 0.0,
+   "S16 all": 0.32755215209928706,
+   "S16 active last week": 0.3323236962982978,
+   "S21 all": 0.3117187758478081,
+   "S21 active last week": 0.3237276185174877,
+   "S21 test users": 0.3489507246376811,
+   "S21 filled": 0.9647642679900745
+  },
+  {
+   "half-life, weeks": "none",
+   "schedule": true,
+   "prior": 0.0,
+   "S16 all": 0.33932048235190565,
+   "S16 active last week": 0.34419526254165544,
+   "S21 all": 0.3108205128205128,
+   "S21 active last week": 0.3221291399944336,
+   "S21 test users": 0.348831884057971,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": "none",
+   "schedule": true,
+   "prior": 1.0,
+   "S16 all": 0.34316961535076135,
+   "S16 active last week": 0.34809871205980364,
+   "S21 all": 0.3189975186104218,
+   "S21 active last week": 0.33095556174042123,
+   "S21 test users": 0.3569913043478261,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": "none",
+   "schedule": true,
+   "prior": 3.0,
+   "S16 all": 0.3457362908194701,
+   "S16 active last week": 0.3507115194091688,
+   "S21 all": 0.32540942928039707,
+   "S21 active last week": 0.3376973745245385,
+   "S21 test users": 0.3642695652173913,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": "none",
+   "schedule": true,
+   "prior": 10.0,
+   "S16 all": 0.3475732770002641,
+   "S16 active last week": 0.3525803836800865,
+   "S21 all": 0.332177005789909,
+   "S21 active last week": 0.34497912607848596,
+   "S21 test users": 0.37077391304347823,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": "none",
+   "schedule": true,
+   "prior": 30.0,
+   "S16 all": 0.3477501980459467,
+   "S16 active last week": 0.35272088624696024,
+   "S21 all": 0.33603804797353193,
+   "S21 active last week": 0.3490880415622971,
+   "S21 test users": 0.37447536231884054,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": "none",
+   "schedule": true,
+   "prior": 100.0,
+   "S16 all": 0.3460531643341256,
+   "S16 active last week": 0.3509222732594794,
+   "S21 all": 0.3362117452440033,
+   "S21 active last week": 0.34916968178866314,
+   "S21 test users": 0.3743304347826087,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": 20,
+   "schedule": false,
+   "prior": 0.0,
+   "S16 all": 0.323140568611918,
+   "S16 active last week": 0.3278222102134558,
+   "S21 all": 0.3090645161290323,
+   "S21 active last week": 0.32109101029780124,
+   "S21 test users": 0.34933333333333333,
+   "S21 filled": 0.9647642679900745
+  },
+  {
+   "half-life, weeks": 20,
+   "schedule": true,
+   "prior": 0.0,
+   "S16 all": 0.34046650822990937,
+   "S16 active last week": 0.3453697198955237,
+   "S21 all": 0.3119511993382961,
+   "S21 active last week": 0.3233203451155024,
+   "S21 test users": 0.3498666666666667,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": 20,
+   "schedule": true,
+   "prior": 1.0,
+   "S16 all": 0.3438174456473902,
+   "S16 active last week": 0.3487552913626948,
+   "S21 all": 0.320490488006617,
+   "S21 active last week": 0.33251693106967245,
+   "S21 test users": 0.35908695652173916,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": 20,
+   "schedule": true,
+   "prior": 3.0,
+   "S16 all": 0.3469368893583311,
+   "S16 active last week": 0.3519337116094749,
+   "S21 all": 0.3265649296939619,
+   "S21 active last week": 0.33904907690880415,
+   "S21 test users": 0.3656811594202899,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": 20,
+   "schedule": true,
+   "prior": 10.0,
+   "S16 all": 0.3487281049203415,
+   "S16 active last week": 0.3537485364315951,
+   "S21 all": 0.33302646815550047,
+   "S21 active last week": 0.3460172557751182,
+   "S21 test users": 0.3723913043478261,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": 20,
+   "schedule": true,
+   "prior": 30.0,
+   "S16 all": 0.34859607428923506,
+   "S16 active last week": 0.35358912005764204,
+   "S21 all": 0.3362109181141439,
+   "S21 active last week": 0.3492114296316913,
+   "S21 test users": 0.375895652173913,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": 20,
+   "schedule": true,
+   "prior": 100.0,
+   "S16 all": 0.34612798169175246,
+   "S16 active last week": 0.35098982257047645,
+   "S21 all": 0.33637634408602146,
+   "S21 active last week": 0.3495611837832823,
+   "S21 test users": 0.374895652173913,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": 10,
+   "schedule": false,
+   "prior": 0.0,
+   "S16 all": 0.3231150426899041,
+   "S16 active last week": 0.3277960911465369,
+   "S21 all": 0.3094863523573201,
+   "S21 active last week": 0.32160590036181463,
+   "S21 test users": 0.3504231884057971,
+   "S21 filled": 0.9647642679900745
+  },
+  {
+   "half-life, weeks": 10,
+   "schedule": true,
+   "prior": 0.0,
+   "S16 all": 0.3404066543438078,
+   "S16 active last week": 0.3453129784742862,
+   "S21 all": 0.3124739454094293,
+   "S21 active last week": 0.32389553761944523,
+   "S21 test users": 0.35195652173913045,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": 10,
+   "schedule": true,
+   "prior": 1.0,
+   "S16 all": 0.3438236070768418,
+   "S16 active last week": 0.3487660992524543,
+   "S21 all": 0.3213019023986766,
+   "S21 active last week": 0.33337508117636144,
+   "S21 test users": 0.3605507246376812,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": 10,
+   "schedule": true,
+   "prior": 3.0,
+   "S16 all": 0.3467793328052108,
+   "S16 active last week": 0.35177699720796185,
+   "S21 all": 0.32704052936311,
+   "S21 active last week": 0.33965952314685965,
+   "S21 test users": 0.3660579710144927,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": 10,
+   "schedule": true,
+   "prior": 10.0,
+   "S16 all": 0.34889270310712084,
+   "S16 active last week": 0.35391245609294786,
+   "S21 all": 0.33355417700578993,
+   "S21 active last week": 0.34669357083217367,
+   "S21 test users": 0.37267246376811597,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": 10,
+   "schedule": true,
+   "prior": 30.0,
+   "S16 all": 0.3484147522225156,
+   "S16 active last week": 0.3534008826443304,
+   "S21 all": 0.33659057071960297,
+   "S21 active last week": 0.3497884775953242,
+   "S21 test users": 0.3770463768115942,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": 10,
+   "schedule": true,
+   "prior": 100.0,
+   "S16 all": 0.3466473021741044,
+   "S16 active last week": 0.3515347203458525,
+   "S21 all": 0.3365649296939619,
+   "S21 active last week": 0.3498432136561833,
+   "S21 test users": 0.3737826086956522,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": 5,
+   "schedule": false,
+   "prior": 0.0,
+   "S16 all": 0.32343103600035206,
+   "S16 active last week": 0.3281194271818427,
+   "S21 all": 0.3069520264681555,
+   "S21 active last week": 0.31941553019760643,
+   "S21 test users": 0.34767246376811595,
+   "S21 filled": 0.9647642679900745
+  },
+  {
+   "half-life, weeks": 5,
+   "schedule": true,
+   "prior": 0.0,
+   "S16 all": 0.33955989789631197,
+   "S16 active last week": 0.3444681617580834,
+   "S21 all": 0.3116170388751034,
+   "S21 active last week": 0.32323221078022085,
+   "S21 test users": 0.35051884057971017,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": 5,
+   "schedule": true,
+   "prior": 1.0,
+   "S16 all": 0.34320394331484905,
+   "S16 active last week": 0.34815365216608124,
+   "S21 all": 0.32146236559139785,
+   "S21 active last week": 0.33366267742833283,
+   "S21 test users": 0.3613449275362319,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": 5,
+   "schedule": true,
+   "prior": 3.0,
+   "S16 all": 0.3460047531027199,
+   "S16 active last week": 0.35098892191299647,
+   "S21 all": 0.32728370554177005,
+   "S21 active last week": 0.33994990258836627,
+   "S21 test users": 0.367431884057971,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": 5,
+   "schedule": true,
+   "prior": 10.0,
+   "S16 all": 0.34804682686383237,
+   "S16 active last week": 0.3530469242547059,
+   "S21 all": 0.33293134822167075,
+   "S21 active last week": 0.3460413767510901,
+   "S21 test users": 0.37241449275362315,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": 5,
+   "schedule": true,
+   "prior": 30.0,
+   "S16 all": 0.3481586127981692,
+   "S16 active last week": 0.3531027650184635,
+   "S21 all": 0.33515219189412737,
+   "S21 active last week": 0.3482512292420447,
+   "S21 test users": 0.37455652173913045,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": 5,
+   "schedule": true,
+   "prior": 100.0,
+   "S16 all": 0.3458480767538069,
+   "S16 active last week": 0.3507439430784473,
+   "S21 all": 0.33500413564929693,
+   "S21 active last week": 0.3481825772335096,
+   "S21 test users": 0.37252173913043474,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": 2.5,
+   "schedule": false,
+   "prior": 0.0,
+   "S16 all": 0.3189824839362732,
+   "S16 active last week": 0.3235630009907232,
+   "S21 all": 0.2946923076923077,
+   "S21 active last week": 0.3065655441135541,
+   "S21 test users": 0.3310666666666667,
+   "S21 filled": 0.9647642679900745
+  },
+  {
+   "half-life, weeks": 2.5,
+   "schedule": true,
+   "prior": 0.0,
+   "S16 all": 0.3368066191356395,
+   "S16 active last week": 0.341659911735567,
+   "S21 all": 0.30396112489660876,
+   "S21 active last week": 0.3154986547917246,
+   "S21 test users": 0.3417536231884058,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": 2.5,
+   "schedule": true,
+   "prior": 1.0,
+   "S16 all": 0.3410492034151923,
+   "S16 active last week": 0.3459398360803387,
+   "S21 all": 0.3145938792390406,
+   "S21 active last week": 0.3267742833286947,
+   "S21 test users": 0.35324927536231887,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": 2.5,
+   "schedule": true,
+   "prior": 3.0,
+   "S16 all": 0.343175776780213,
+   "S16 active last week": 0.3480779969377646,
+   "S21 all": 0.3207923904052936,
+   "S21 active last week": 0.3334019853418685,
+   "S21 test users": 0.35789565217391306,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": 2.5,
+   "schedule": true,
+   "prior": 10.0,
+   "S16 all": 0.346454537452689,
+   "S16 active last week": 0.35137710528685945,
+   "S21 all": 0.32634822167080235,
+   "S21 active last week": 0.33934873364876145,
+   "S21 test users": 0.3633304347826087,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": 2.5,
+   "schedule": true,
+   "prior": 30.0,
+   "S16 all": 0.34628817885749497,
+   "S16 active last week": 0.35116455012158876,
+   "S21 all": 0.3300885028949545,
+   "S21 active last week": 0.34339734669264316,
+   "S21 test users": 0.3673304347826087,
+   "S21 filled": 0.9577171215880893
+  },
+  {
+   "half-life, weeks": 2.5,
+   "schedule": true,
+   "prior": 100.0,
+   "S16 all": 0.3441343191620456,
+   "S16 active last week": 0.34901017742952356,
+   "S21 all": 0.3303399503722084,
+   "S21 active last week": 0.34344744410427686,
+   "S21 test users": 0.36704927536231885,
+   "S21 filled": 0.9577171215880893
+  }
+ ],
+ "results": {
+  "S16 popularity": {
+   "all": 0.24776692192588678,
+   "active in the last history week": 0.2510132396649554,
+   "places filled before fallback": 0.0
+  },
+  "S21 popularity": {
+   "all": 0.23409429280397023,
+   "active in the last history week": 0.24183133871416645,
+   "test users": 0.2591942028985508,
+   "places filled before fallback": 0.0
+  },
+  "S16 habit x schedule": {
+   "all": 0.3484147522225156,
+   "active in the last history week": 0.3534008826443304,
+   "places filled before fallback": 0.9104832321098495
+  },
+  "S16 habit count only": {
+   "all": 0.3231150426899041,
+   "active in the last history week": 0.3277960911465369,
+   "places filled before fallback": 0.9270662793768155
+  },
+  "S21 habit x schedule": {
+   "all": 0.33659057071960297,
+   "active in the last history week": 0.3497884775953242,
+   "test users": 0.3770463768115942,
+   "places filled before fallback": 0.9577171215880893
+  },
+  "S21 habit count only": {
+   "all": 0.3094863523573201,
+   "active in the last history week": 0.32160590036181463,
+   "test users": 0.3504231884057971,
+   "places filled before fallback": 0.9647642679900745
+  }
+ }
+}

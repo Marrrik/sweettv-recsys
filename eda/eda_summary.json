@@ -1,0 +1,250 @@
+{
+ "views": {
+  "rows": 5821987,
+  "users": 4914,
+  "channels (vsetv_id)": 202,
+  "null cells": 0,
+  "exact duplicate rows": 17,
+  "rows where duraton differs from stop minus start": 117,
+  "max abs difference, s": 3600,
+  "non-positive duraton": 0,
+  "first start": "2020-03-09 00:00:02",
+  "last stop": "2020-07-26 23:59:58"
+ },
+ "schedule_parts": {
+  "w11_20": {
+   "rows": "1074235",
+   "labelled rows": "115613",
+   "labelled share of rows": "0.1076",
+   "labelled share of airtime": "0.1597",
+   "channels": "400",
+   "channels with any label": "177",
+   "programmes (tv_show_id)": "5847",
+   "categories": "9",
+   "first start": "2020-03-08 23:00:00",
+   "last end": "2020-05-18 12:00:00"
+  },
+  "w21_30": {
+   "rows": "1074394",
+   "labelled rows": "121505",
+   "labelled share of rows": "0.1131",
+   "labelled share of airtime": "0.169",
+   "channels": "403",
+   "channels with any label": "188",
+   "programmes (tv_show_id)": "6363",
+   "categories": "9",
+   "first start": "2020-05-18 00:00:00",
+   "last end": "2020-07-27 12:00:00"
+  },
+  "w31_42": {
+   "rows": "1295378",
+   "labelled rows": "144774",
+   "labelled share of rows": "0.1118",
+   "labelled share of airtime": "0.1667",
+   "channels": "404",
+   "channels with any label": "191",
+   "programmes (tv_show_id)": "6636",
+   "categories": "9",
+   "first start": "2020-07-27 00:00:00",
+   "last end": "2020-10-19 12:00:00"
+  }
+ },
+ "logging_gap": {
+  "days_without_views": [
+   "2020-07-03"
+  ],
+  "users_missing_in_gap": 1129,
+  "users_before_and_after": 4727
+ },
+ "test_users": {
+  "n": 1260,
+  "in_view_log": 1260
+ },
+ "alignment": {
+  "best_shift_hours": 0.0,
+  "stop_hit_best": 0.04771,
+  "stop_hit_median": 0.03456,
+  "best_shift_by_week": {
+   "11": 0,
+   "12": 0,
+   "13": 0,
+   "14": 0,
+   "15": 0,
+   "16": 0,
+   "17": 0,
+   "18": 0,
+   "19": 0,
+   "20": 0,
+   "21": 0,
+   "22": 0,
+   "23": 0,
+   "24": 0,
+   "25": 0,
+   "26": 0,
+   "27": 0,
+   "28": 0,
+   "29": 0,
+   "30": 0
+  }
+ },
+ "join": {
+  "views overlapping any slot": 0.9289952038711182,
+  "views overlapping a labelled slot": 0.5091639675595291,
+  "viewing time inside any slot": 0.940656546946901,
+  "viewing time inside labelled slots": 0.5308201605478322,
+  "users with any labelled overlap": 0.9961334961334961,
+  "test users with any labelled overlap": 1258
+ },
+ "threshold_sensitivity": {
+  "any overlap": {
+   "user-airing events": 3014129,
+   "user-programme pairs": 1371685,
+   "users": 4895,
+   "test users": 1258,
+   "users with >= 5 programmes": 4874,
+   "programmes": 4363,
+   "median programmes per user": 249.0
+  },
+  ">= 300 s": {
+   "user-airing events": 2079171,
+   "user-programme pairs": 949556,
+   "users": 4890,
+   "test users": 1258,
+   "users with >= 5 programmes": 4856,
+   "programmes": 4276,
+   "median programmes per user": 171.0
+  },
+  ">= 50% of slot": {
+   "user-airing events": 940359,
+   "user-programme pairs": 368703,
+   "users": 4871,
+   "test users": 1256,
+   "users with >= 5 programmes": 4766,
+   "programmes": 4071,
+   "median programmes per user": 58.0
+  },
+  ">= 80% of slot (target rule)": {
+   "user-airing events": 615979,
+   "user-programme pairs": 230113,
+   "users": 4841,
+   "test users": 1256,
+   "users with >= 5 programmes": 4633,
+   "programmes": 3867,
+   "median programmes per user": 33.0
+  },
+  ">= 95% of slot": {
+   "user-airing events": 482230,
+   "user-programme pairs": 172963,
+   "users": 4805,
+   "test users": 1252,
+   "users with >= 5 programmes": 4458,
+   "programmes": 3716,
+   "median programmes per user": 22.0
+  }
+ },
+ "target_windows": {
+  "W1": {
+   "qualifying airings": 319771,
+   "user-programme pairs": 116194,
+   "users with any": 4737,
+   "users with at least 5 (have a target)": 4349,
+   "test users with at least 5": 1197,
+   "median qualifying programmes per user": 20.0,
+   "median qualifying airings per user": 46.0
+  },
+  "W2": {
+   "qualifying airings": 296208,
+   "user-programme pairs": 141105,
+   "users with any": 4643,
+   "users with at least 5 (have a target)": 4030,
+   "test users with at least 5": 1150,
+   "median qualifying programmes per user": 17.0,
+   "median qualifying airings per user": 34.0
+  }
+ },
+ "target_ties": {
+  "share_5th_equals_6th": 0.6793912819190095,
+  "users_with_6th": 3877
+ },
+ "stability": {
+  "users_both": 3812,
+  "map5_prev_top5": 0.3129310947883876,
+  "mean_shared": 1.8213536201469045
+ },
+ "block_decay": {
+  "B1 (11-15)": {
+   "B1 (11-15)": NaN,
+   "B2 (16-20)": NaN,
+   "B3 (21-25)": NaN,
+   "B4 (26-30)": NaN
+  },
+  "B2 (16-20)": {
+   "B1 (11-15)": 0.3372,
+   "B2 (16-20)": NaN,
+   "B3 (21-25)": NaN,
+   "B4 (26-30)": NaN
+  },
+  "B3 (21-25)": {
+   "B1 (11-15)": 0.2705,
+   "B2 (16-20)": 0.2947,
+   "B3 (21-25)": NaN,
+   "B4 (26-30)": NaN
+  },
+  "B4 (26-30)": {
+   "B1 (11-15)": 0.2338,
+   "B2 (16-20)": 0.2411,
+   "B3 (21-25)": 0.2701,
+   "B4 (26-30)": NaN
+  }
+ },
+ "test_window": {
+  "programmes airing in w31_42": 6642,
+  "of them aired in weeks 11 to 30": 0.7838000602228244,
+  "of them watched at 0.8 by someone in training": 0.42984040951520625,
+  "labelled airings of programmes aired in training": 0.9565145319924854
+ },
+ "test_users_history": {
+  "test users with any qualifying programme in weeks 11 to 30": 1256,
+  "test users with at least 5": 1241,
+  "test users with at least 5 that still air in w31_42": 1238,
+  "share of their qualifying programmes still airing": 0.8785945683663713
+ },
+ "candidate_coverage": {
+  "in_w1_qualifying": 0.5125,
+  "in_w1_any_overlap": 0.6584,
+  "on_top3_channels": 0.494,
+  "in_global_top50": 0.607,
+  "any of these": 0.8101,
+  "W1 qualifying or global top 50": 0.6607
+ },
+ "diagnostic_map5": {
+  "global top-5 by W1 target membership": 0.23409429280397023,
+  "global top-5 by W1 qualifying users": 0.21408933002481392,
+  "global top-5 by W1 qualifying airings": 0.23679818031430935,
+  "own W1 top-5 still airing, then popular": 0.30625310173697273,
+  "own W1 programmes by frequency, still airing, then popular": 0.3114822167080232
+ },
+ "habit_coverage": {
+  ">= 0.5 h in the cell over W1": {
+   "share of W2 target pairs covered": 0.6852286928267933,
+   "median candidate programmes per user": 304.0
+  },
+  ">= 1 h in the cell over W1": {
+   "share of W2 target pairs covered": 0.5470632341914521,
+   "median candidate programmes per user": 138.0
+  },
+  ">= 3 h in the cell over W1": {
+   "share of W2 target pairs covered": 0.12921769557610596,
+   "median candidate programmes per user": 2.0
+  },
+  ">= 10 h in the cell over W1": {
+   "share of W2 target pairs covered": 0.0007498125468632841,
+   "median candidate programmes per user": 0.0
+  }
+ },
+ "fallback": {
+  "5 or more": 1241,
+  "1 to 4": 15,
+  "none": 4
+ }
+}

@@ -1,0 +1,11 @@
+data/
+.venv/
+kaggle/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+report/*.aux
+report/*.log
+report/*.out
+report/*.bbl
+report/*.blg
