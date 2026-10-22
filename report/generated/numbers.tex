@@ -34,8 +34,8 @@
 \newcommand{\pprAlpha}{0.5}
 \newcommand{\pprWeighting}{count}
 \newcommand{\rulesSupport}{30}
-\newcommand{\mapHybrid}{0.3595}
-\newcommand{\mapHybridTest}{0.3960}
+\newcommand{\mapHybrid}{0.3612}
+\newcommand{\mapHybridTest}{0.3987}
 \newcommand{\mapHS}{0.3366}
 \newcommand{\mapHScount}{0.3095}
 \newcommand{\mapPop}{0.2341}
@@ -43,27 +43,28 @@
 \newcommand{\mapALS}{0.2832}
 \newcommand{\mapRules}{0.2545}
 \newcommand{\mapContent}{0.0854}
-\newcommand{\lbHybrid}{0.45244}
-\newcommand{\lbHybridPriv}{0.44757}
+\newcommand{\lbHybrid}{0.45497}
+\newcommand{\lbHybridPriv}{0.45015}
+\newcommand{\finalFile}{ranker\_v4.csv}
 \newcommand{\lbHS}{0.42188}
 \newcommand{\lbPop}{0.32330}
 \newcommand{\lbPPR}{0.40855}
-\newcommand{\diffHS}{0.0229}
-\newcommand{\ciHS}{[0.0197, 0.0261]}
-\newcommand{\higherHS}{1{,}452}
-\newcommand{\lowerHS}{849}
-\newcommand{\diffPPR}{0.0411}
-\newcommand{\ciPPR}{[0.0378, 0.0445]}
-\newcommand{\higherPPR}{1{,}726}
-\newcommand{\lowerPPR}{711}
-\newcommand{\diffPop}{0.1254}
-\newcommand{\ciPop}{[0.1192, 0.1319]}
-\newcommand{\higherPop}{2{,}396}
-\newcommand{\lowerPop}{730}
-\newcommand{\segHybridLight}{0.2399}
+\newcommand{\diffHS}{0.0246}
+\newcommand{\ciHS}{[0.0216, 0.0278]}
+\newcommand{\higherHS}{1{,}488}
+\newcommand{\lowerHS}{831}
+\newcommand{\diffPPR}{0.0428}
+\newcommand{\ciPPR}{[0.0394, 0.0463]}
+\newcommand{\higherPPR}{1{,}771}
+\newcommand{\lowerPPR}{678}
+\newcommand{\diffPop}{0.1271}
+\newcommand{\ciPop}{[0.1209, 0.1336]}
+\newcommand{\higherPop}{2{,}435}
+\newcommand{\lowerPop}{713}
+\newcommand{\segHybridLight}{0.2385}
 \newcommand{\segHSLight}{0.2117}
 \newcommand{\segPopLight}{0.1480}
-\newcommand{\segHybridHeavy}{0.4815}
+\newcommand{\segHybridHeavy}{0.4845}
 \newcommand{\segHSHeavy}{0.4644}
 \newcommand{\segPopHeavy}{0.3268}
 \newcommand{\mapRankerOneLambda}{0.3566}
@@ -71,18 +72,47 @@
 \newcommand{\mapEfour}{0.3586}
 \newcommand{\mapEfourSeeds}{0.3595}
 \newcommand{\mapHSfeature}{0.3366}
-\newcommand{\impNameA}{the within-user rank of habit-slot exposure}
-\newcommand{\impShareA}{42\%}
-\newcommand{\impNameB}{the within-user rank of the habit-slot score}
-\newcommand{\impShareB}{22\%}
-\newcommand{\impNameC}{habit coverage of whole airings in the window}
-\newcommand{\impShareC}{9\%}
+\newcommand{\impNameA}{the within-user rank of recency-weighted habit coverage}
+\newcommand{\impShareA}{33\%}
+\newcommand{\impNameB}{the within-user rank of habit-slot exposure}
+\newcommand{\impShareB}{17\%}
+\newcommand{\impNameC}{the within-user rank of the habit-slot score}
+\newcommand{\impShareC}{16\%}
+\newcommand{\nFeatures}{80}
+\newcommand{\nSeeds}{five}
+\newcommand{\nModels}{ten}
+\newcommand{\seedRange}{0 to 4}
+\newcommand{\rrfK}{0}
+\newcommand{\lgbParams}{learning rate 0.02, 63 leaves, 300 rows per leaf, feature fraction 0.5, bagging 0.8, L2 20}
+\newcommand{\finalRuntime}{3{,}115}
+\newcommand{\mapEfive}{0.3594}
+\newcommand{\mapEfiveWide}{0.3597}
+\newcommand{\mapFinal}{0.3612}
+\newcommand{\nSubmissions}{13}
+\newcommand{\hybWatched}{83\%}
+\newcommand{\hybNew}{5\%}
+\newcommand{\hybPrecFam}{0.434}
+\newcommand{\hsPrecFam}{0.397}
+\newcommand{\maxPrecNew}{0.157}
+\newcommand{\pprWatched}{96\%}
+\newcommand{\pprDistinct}{730}
+\newcommand{\alsDistinct}{78}
+\newcommand{\rulesShared}{3.85}
+\newcommand{\rulesNews}{70\%}
+\newcommand{\actWatched}{50.9\%}
+\newcommand{\actTouched}{14.5\%}
+\newcommand{\actNew}{34.6\%}
+\newcommand{\actNewRound}{35\%}
 \newcommand{\userA}{3525695269081370558}
 \newcommand{\hoursA}{350}
 \newcommand{\nProgA}{47}
 \newcommand{\apHybridA}{0.71}
 \newcommand{\apHSA}{0.76}
 \newcommand{\apPPRA}{0.64}
+\newcommand{\hybListA}{12001682, 12002856, 2400480, 2400508, 2400467}
+\newcommand{\hybHitsA}{four}
+\newcommand{\hybHitRanksA}{1, 2, 4 and 5}
+\newcommand{\hybApFormulaA}{(1/1+2/2+3/4+4/5)/5}
 \newcommand{\fillA}{every method filled all five places itself}
 \newcommand{\userB}{14049050536217794294}
 \newcommand{\hoursB}{59}
@@ -90,4 +120,8 @@
 \newcommand{\apHybridB}{0.00}
 \newcommand{\apHSB}{0.00}
 \newcommand{\apPPRB}{0.00}
+\newcommand{\hybListB}{2400467, 2400480, 240081, 500331, 6500479}
+\newcommand{\hybHitsB}{no}
+\newcommand{\hybHitRanksB}{none}
+\newcommand{\hybApFormulaB}{0}
 \newcommand{\fillB}{every method filled all five places itself}

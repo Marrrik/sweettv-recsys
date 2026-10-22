@@ -4,9 +4,9 @@ For each of the 1,260 users of the Kaggle community competition
 [sweet.tv — TV program recommender](https://www.kaggle.com/competitions/sweettv-tv-program-recommender) the code
 predicts the five programmes the user will most often watch for at least 80% of an airing in weeks 31 to 42 of 2020.
 
-Final submission: `submissions/ranker_v3.csv`, a LightGBM re-ranker over popularity, a habit-times-schedule
+Final submission: `submissions/ranker_v4.csv`, a LightGBM re-ranker over popularity, a habit-times-schedule
 heuristic, ALS, personalised PageRank, association rules, content-based filtering and viewing-habit features.
-Returned Kaggle score: public 0.45244, private 0.44757. Hold-out MAP@5 (weeks 21 to 30): 0.3595.
+Returned Kaggle score: public 0.45497, private 0.45015. Hold-out MAP@5 (weeks 21 to 30): 0.3612.
 The report is `report/starchenko_exam_report.pdf`.
 
 ## Data
@@ -48,15 +48,16 @@ Run in this order; times are on an AMD Zen 4 laptop with 16 threads.
 | 3 | `modelling/cf_models.ipynb` | ALS, PPR, rules, content settings (`cf_results.json`) and submissions | 215 s |
 | 4 | `modelling/ranker.ipynb` | re-ranker round 1 and its submissions | 497 s |
 | 5 | `modelling/ranker_v2.ipynb` | round 2, `submissions/ranker_v2.csv` | 463 s |
-| 6 | `modelling/ranker_v3.ipynb` | round 3, the final `submissions/ranker_v3.csv` | 1,488 s |
-| 7 | `modelling/analysis.ipynb` | hold-out comparison, bootstrap, list properties, example users | 35 s |
-| 8 | `tests/check_core.py` | hand-made checks of MAP@5, the join, the target rule, ALS and the submission format | seconds |
-| 9 | `report/make_figures.py`, `report/make_tables.py`, then `pdflatex report.tex` in `report/` | report figure, tables and PDF | seconds |
+| 6 | `modelling/ranker_v3.ipynb` | round 3, `submissions/ranker_v3.csv` | 1,488 s |
+| 7 | `modelling/ranker_v4.ipynb` | round 4, the final `submissions/ranker_v4.csv` | 3,115 s |
+| 8 | `modelling/analysis.ipynb` | hold-out comparison, bootstrap, list properties, example users | 35 s |
+| 9 | `tests/check_core.py` | hand-made checks of MAP@5, the join, the target rule, ALS and the submission format | seconds |
+| 10 | `report/make_figures.py`, `report/make_tables.py`, then `pdflatex report.tex` in `report/` | report figure, tables and PDF | seconds |
 
 Round 1 (`ranker.ipynb`) was executed with the first ALS setting (32 factors, alpha 3, reg 100), before the ALS grid in
 `cf_models.ipynb` was extended; rerunning it now reads the current `cf_results.json` and gives slightly different
-round-1 numbers. Rounds 2 and 3 used the current setting. Seeds are fixed (0 for ALS, sampling and the bootstrap, 0 to 2
-for LightGBM), and round 3 reproduced round 2 to four decimals.
+round-1 numbers. Rounds 2 to 4 used the current setting. Seeds are fixed (0 for ALS, sampling and the bootstrap, 0 to 4
+for LightGBM). Round 3 reproduced round 2, and round 4 reproduced round 3, to four decimals.
 
 ## Layout
 

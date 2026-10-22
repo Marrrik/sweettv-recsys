@@ -1,0 +1,203 @@
+{
+ "results": {
+  "E4 binary": {
+   "all": 0.35665343258891646,
+   "test users": 0.3922434782608696,
+   "best iteration": 699,
+   "seconds": 44
+  },
+  "E4 lambdarank": {
+   "all": 0.3587948717948718,
+   "test users": 0.39547246376811596,
+   "best iteration": 357,
+   "seconds": 34
+  },
+  "E4 blend": {
+   "all": 0.35863275434243175,
+   "test users": 0.39478840579710145
+  },
+  "E5 binary": {
+   "all": 0.3589917287014061,
+   "test users": 0.39437681159420285,
+   "best iteration": 771,
+   "seconds": 54
+  },
+  "E5 lambdarank": {
+   "all": 0.35950703060380473,
+   "test users": 0.3968550724637681,
+   "best iteration": 518,
+   "seconds": 49
+  },
+  "E5 blend": {
+   "all": 0.35940446650124064,
+   "test users": 0.39554782608695654
+  },
+  "E5 small binary": {
+   "all": 0.3577460711331679,
+   "test users": 0.39384927536231884,
+   "best iteration": 1672,
+   "seconds": 109
+  },
+  "E5 small lambdarank": {
+   "all": 0.35910339123242346,
+   "test users": 0.3957130434782609,
+   "best iteration": 563,
+   "seconds": 53
+  },
+  "E5 small blend": {
+   "all": 0.35923490488006615,
+   "test users": 0.3959304347826087
+  },
+  "E5 wide binary": {
+   "all": 0.35837965260545906,
+   "test users": 0.39406956521739134,
+   "best iteration": 784,
+   "seconds": 76
+  },
+  "E5 wide lambdarank": {
+   "all": 0.3602258064516129,
+   "test users": 0.39759420289855074,
+   "best iteration": 384,
+   "seconds": 49
+  },
+  "E5 wide blend": {
+   "all": 0.35967824648469815,
+   "test users": 0.396031884057971
+  },
+  "E5 wide blend, 3 seeds, k=0": {
+   "all": 0.3607559966914806,
+   "test users": 0.3969710144927536
+  },
+  "E5 wide blend, 3 seeds, k=60": {
+   "all": 0.36107278742762616,
+   "test users": 0.3971855072463768
+  },
+  "E5 wide blend, 5 seeds, k=0": {
+   "all": 0.36122828784119104,
+   "test users": 0.39867826086956526
+  },
+  "E5 wide blend, 5 seeds, k=60": {
+   "all": 0.3608866832092638,
+   "test users": 0.3985913043478261
+  }
+ },
+ "selected": "E5 wide blend, 5 seeds, k=0",
+ "experiment": "E5 wide",
+ "seeds": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "k": 0,
+ "final_snapshots": [
+  "S14",
+  "S16",
+  "S18",
+  "S21",
+  "S26"
+ ],
+ "param_set": "wide",
+ "n_features": 80,
+ "iterations": {
+  "E4 binary seed 0": 699,
+  "E4 lambdarank seed 0": 357,
+  "E5 binary seed 0": 771,
+  "E5 lambdarank seed 0": 518,
+  "E5 small binary seed 0": 1672,
+  "E5 small lambdarank seed 0": 563,
+  "E5 wide binary seed 0": 784,
+  "E5 wide lambdarank seed 0": 384,
+  "E5 wide binary seed 1": 854,
+  "E5 wide lambdarank seed 1": 551,
+  "E5 wide binary seed 2": 786,
+  "E5 wide lambdarank seed 2": 640,
+  "E5 wide binary seed 3": 785,
+  "E5 wide lambdarank seed 3": 247,
+  "E5 wide binary seed 4": 796,
+  "E5 wide lambdarank seed 4": 400
+ },
+ "importance": {
+  "rank_habit_rec_cov": 0.32754,
+  "rank_habit_exposure": 0.17322,
+  "rank_cf_habit": 0.15595,
+  "habit_day_cov": 0.06344,
+  "rank_fw_min": 0.03179,
+  "fwd_min": 0.03148,
+  "pop_top5": 0.02424,
+  "rank_cf_ppr": 0.01702,
+  "rank_cf_als": 0.01357,
+  "u_q_total": 0.0116,
+  "rank_hs": 0.01082,
+  "fwd_prod": 0.01061,
+  "pop_q_users": 0.01032,
+  "win_airings": 0.00944,
+  "habit_cov": 0.00928,
+  "win_airings_user_channels": 0.00685,
+  "rank_cf_rules": 0.00685,
+  "rank_hs_p0": 0.00627,
+  "n_half": 0.00586,
+  "fw_prod": 0.00477,
+  "pop_q_last4": 0.0044,
+  "n_touch": 0.00376,
+  "u_lab_hours": 0.00362,
+  "hist_airings": 0.0036,
+  "habit_rec_cov": 0.00348,
+  "u_q_5th": 0.00336,
+  "category": 0.00315,
+  "year": 0.003,
+  "hs": 0.00269,
+  "airing_ratio": 0.00261,
+  "cf_rules": 0.00234,
+  "rank_n_qw": 0.0023,
+  "win_slot_min": 0.00221,
+  "habit_recent_cov": 0.00199,
+  "pop_q_per_user": 0.00195,
+  "frac_mean": 0.00167,
+  "hs_p0": 0.00164,
+  "cf_content": 0.00159,
+  "weeks_since_last": 0.00151,
+  "exposure": 0.00151,
+  "cf_als": 0.00126,
+  "src_pop": 0.0012,
+  "sec_sum": 0.00116,
+  "hs_p3": 0.00108,
+  "u_q_programmes": 0.00106,
+  "u_active_days": 0.001,
+  "touch_rate": 0.00099,
+  "win_early_ratio": 0.00096,
+  "rank_cf_content": 0.00094,
+  "weeks_since_first": 0.00072,
+  "weeks_since_last_q": 0.00067,
+  "exposure_last4": 0.00062,
+  "cf_ppr": 0.00052,
+  "habit_exposure": 0.00047,
+  "frac_max": 0.00044,
+  "cf_habit": 0.00036,
+  "win_channels": 0.00031,
+  "fw_min": 0.0003,
+  "habit_cov_hist": 0.00029,
+  "habit_exposure_hist": 0.00029,
+  "q_per_cov": 0.00027,
+  "fw_hist_min": 0.00026,
+  "q_rate": 0.00023,
+  "q_last2": 0.00022,
+  "rate_last4": 0.00019,
+  "q_per_fw": 0.00018,
+  "q_per_habit": 0.00017,
+  "q_last1": 0.00012,
+  "n_qw": 8e-05,
+  "src_als": 8e-05,
+  "n_channels_watched": 8e-05,
+  "n_q": 6e-05,
+  "q_last4": 6e-05,
+  "src_habit": 5e-05,
+  "src_content": 3e-05,
+  "u_active_last_week": 2e-05,
+  "src_rules": 0.0,
+  "src_ppr": 0.0,
+  "src_touched": 0.0,
+  "new_programme": 0.0
+ }
+}

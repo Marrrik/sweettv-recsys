@@ -37,6 +37,8 @@ def split_users(df, share=0.2, seed=0):
 PARAM_SETS = {
     'base': {},
     'regularised': dict(learning_rate=0.03, num_leaves=31, min_data_in_leaf=300, feature_fraction=0.6, lambda_l2=10.0),
+    'small': dict(learning_rate=0.03, num_leaves=15, min_data_in_leaf=500, feature_fraction=0.5, lambda_l2=10.0),
+    'wide': dict(learning_rate=0.02, num_leaves=63, min_data_in_leaf=300, feature_fraction=0.5, lambda_l2=20.0),
 }
 
 
@@ -62,7 +64,7 @@ def predict(booster, df):
     return booster.predict(df[booster.feature_name()], num_iteration=booster.best_iteration or None)
 
 
-def user_rank_score(df, score):
-    """Turn a score into a within-user score in (0, 1], 1 for the best candidate, so objectives can be averaged."""
+def user_rank_score(df, score, k=0):
+    """Reciprocal rank 1 / (k + rank) within the user, so that scores of different objectives can be summed."""
     r = pd.Series(score, index=df.index).groupby(df.user_id).rank(ascending=False, method='first')
-    return 1.0 / r.to_numpy()
+    return 1.0 / (k + r.to_numpy())

@@ -5,10 +5,13 @@ submission list). Writes report/generated/*.tex. Run from anywhere: python repor
 """
 import json
 import os
+import sys
 
 import pandas as pd
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.insert(0, os.path.join(ROOT, 'src'))
+from sweettv.ranker import BASE_PARAMS, PARAM_SETS  # noqa: E402
 OUT = os.path.join(ROOT, 'report', 'generated')
 os.makedirs(OUT, exist_ok=True)
 
@@ -25,6 +28,9 @@ r1 = load('modelling/ranker_results.json')
 r2 = load('modelling/ranker_v2_results.json')
 r3 = load('modelling/ranker_v3_results.json')
 an = load('modelling/analysis_results.json')
+FINAL = an['final']  # the designated re-ranker round, set in modelling/analysis.py
+rf = load(f'modelling/{FINAL}_results.json')
+r4 = load('modelling/ranker_v4_results.json')
 kag = pd.read_csv(os.path.join(ROOT, 'report', 'kaggle_submissions.csv'))
 kag['date'] = pd.to_datetime(kag.date)
 kag = kag.sort_values('date').groupby('fileName').tail(1).set_index('fileName')
@@ -116,7 +122,7 @@ rows = [
     ('Association rules', sm['rules | S21 all'], sm['rules | S21 test users'], sm['rules | S16 all'], 'rules.csv', 'Association rules'),
     ('Content-based', sm['content | S21 all'], sm['content | S21 test users'], sm['content | S16 all'], 'content.csv', 'Content-based'),
 ]
-hyb = r3['results'][r3['selected']]
+hyb = rf['results'][rf['selected']]
 boot = an['bootstrap']
 lines = []
 for name, a21, t21, a16, sub, key in rows:
@@ -125,7 +131,7 @@ for name, a21, t21, a16, sub, key in rows:
                  f"{b['hybrid minus method']:+.4f} [{b['ci low']:.4f}, {b['ci high']:.4f}] \\\\")
 lines.append('\\midrule')
 lines.append(f"Hybrid (final) & \\textbf{{{f4(hyb['all'])}}} & \\textbf{{{f4(hyb['test users'])}}} & (train) & "
-             f"\\textbf{{{lb('ranker_v3.csv')}}} & {lb('ranker_v3.csv', 'privateScore')} & -- \\\\")
+             f"\\textbf{{{lb(FINAL + '.csv')}}} & {lb(FINAL + '.csv', 'privateScore')} & -- \\\\")
 with open(os.path.join(OUT, 'tab_methods.tex'), 'w', encoding='utf-8') as f:
     f.write('\n'.join(lines) + '\n')
 m('mapHybrid', f4(hyb['all']))
@@ -137,8 +143,9 @@ m('mapPPR', f4(sm['ppr | S21 all']))
 m('mapALS', f4(sm['als | S21 all']))
 m('mapRules', f4(sm['rules | S21 all']))
 m('mapContent', f4(sm['content | S21 all']))
-m('lbHybrid', lb('ranker_v3.csv'))
-m('lbHybridPriv', lb('ranker_v3.csv', 'privateScore'))
+m('lbHybrid', lb(FINAL + '.csv'))
+m('lbHybridPriv', lb(FINAL + '.csv', 'privateScore'))
+m('finalFile', FINAL.replace('_', '\\_') + '.csv')
 m('lbHS', lb('habit_schedule.csv'))
 m('lbPop', lb('popularity.csv'))
 m('lbPPR', lb('ppr.csv'))
@@ -168,6 +175,9 @@ rounds = [
     ('R2 E3', 'S14--S18', '60/60', '63', 'RRF b+l, reg', rr['E3 binary + lambdarank'], 'ranker_v2.csv'),
     ('R3 E4', 'S14--S18', '60/60', '67', 'RRF b+l, reg', r3r['E4 binary + lambdarank'], None),
     ('R3 E4', 'S14--S18', '60/60', '67', '3 seeds, reg', r3r['E4 binary + lambdarank, 3 seeds'], 'ranker_v3.csv'),
+    ('R4 E5', 'S14--S18', '60/60', '80', 'RRF b+l, reg', r4['results']['E5 blend'], None),
+    ('R4 E5', 'S14--S18', '60/60', '80', 'RRF b+l, wide', r4['results']['E5 wide blend'], None),
+    ('R4 E5', 'S14--S18', '60/60', '80', '5 seeds, wide', r4['results']['E5 wide blend, 5 seeds, k=0'], 'ranker_v4.csv'),
 ]
 lines = [f"{a} & {b} & {c} & {d} & {e} & {f4(res['all'])} & {f4(res['test users'])} & {lb(sub) if sub else '--'} \\\\"
          for a, b, c, d, e, res, sub in rounds]
@@ -178,16 +188,42 @@ m('mapEthree', f4(rr['E3 binary + lambdarank']['all']))
 m('mapEfour', f4(r3r['E4 binary + lambdarank']['all']))
 m('mapEfourSeeds', f4(r3r['E4 binary + lambdarank, 3 seeds']['all']))
 m('mapHSfeature', f4(e1['habit x schedule feature alone']['all']))
-imp = r3['importance']
+imp = rf['importance']
 top_imp = sorted(imp.items(), key=lambda kv: -kv[1])[:3]
 words = {'rank_habit_exposure': 'the within-user rank of habit-slot exposure',
          'rank_cf_habit': 'the within-user rank of the habit-slot score',
          'habit_cov': 'habit coverage of whole airings in the window',
+         'rank_habit_rec_cov': 'the within-user rank of recency-weighted habit coverage',
+         'habit_day_cov': 'weekday-pooled habit coverage', 'rank_fw_min': 'the within-user rank of the full-watch minimum',
          'habit_exposure': 'habit-slot exposure', 'cf_habit': 'the habit-slot score', 'rank_cf_ppr': 'the within-user rank of PPR',
          'hs': 'the habit $\\times$ schedule score', 'rank_hs': 'the within-user rank of habit $\\times$ schedule'}
 for i, (k, val) in enumerate(top_imp):
     m(f'impName{"ABC"[i]}', words.get(k, '\\texttt{' + k.replace('_', '\\_') + '}'))
     m(f'impShare{"ABC"[i]}', pct(val, 0))
+
+# configuration of the final re-ranker
+NUM = {1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six', 7: 'seven', 8: 'eight', 9: 'nine', 10: 'ten'}
+seeds = rf.get('seeds', [0])
+m('nFeatures', str(rf.get('n_features', 67)))
+m('nSeeds', NUM[len(seeds)])
+m('nModels', NUM[2 * len(seeds)])
+m('seedRange', f'{min(seeds)} to {max(seeds)}')
+m('rrfK', str(rf.get('k', 0)))
+p = {**BASE_PARAMS, **PARAM_SETS[rf.get('param_set', 'regularised')]}
+m('lgbParams', f"learning rate {p['learning_rate']:g}, {p['num_leaves']} leaves, {p['min_data_in_leaf']} rows per leaf, "
+               f"feature fraction {p['feature_fraction']:g}, bagging {p['bagging_fraction']:g}, L2 {p['lambda_l2']:g}")
+nb = json.load(open(os.path.join(ROOT, 'modelling', f'{FINAL}.ipynb'), encoding='utf-8'))
+runtime = None
+for cell in nb['cells']:
+    for out in cell.get('outputs', []):
+        if out.get('output_type') == 'stream' and 'total runtime' in ''.join(out['text']):
+            runtime = int(''.join(out['text']).split('total runtime')[1].split('s')[0])
+m('finalRuntime', intc(runtime))
+m('mapEfour', f4(r4['results']['E4 blend']['all']))
+m('mapEfive', f4(r4['results']['E5 blend']['all']))
+m('mapEfiveWide', f4(r4['results']['E5 wide blend']['all']))
+m('mapFinal', f4(hyb['all']))
+m('nSubmissions', str(len([n for n in os.listdir(os.path.join(ROOT, 'submissions')) if n.endswith('.csv')])))
 
 # list properties
 pr = an['properties']
@@ -202,6 +238,22 @@ for k in order:
                  f"{pct(pr['category share Инфо'][k], 0)} \\\\")
 with open(os.path.join(OUT, 'tab_props.tex'), 'w', encoding='utf-8') as f:
     f.write('\n'.join(lines) + '\n')
+H_ = 'Hybrid (LightGBM re-ranker)'
+m('hybWatched', pct(pr['share watched at 0.8 before'][H_], 0))
+m('hybNew', pct(pr['share new to the user'][H_], 0))
+m('hybPrecFam', f"{pr['precision on familiar'][H_]:.3f}")
+m('hsPrecFam', f"{pr['precision on familiar']['Habit x schedule']:.3f}")
+m('maxPrecNew', f"{max(pr['precision on new'].values()):.3f}")
+m('pprWatched', pct(pr['share watched at 0.8 before']['PPR'], 0))
+m('pprDistinct', intc(pr['distinct programmes']['PPR']))
+m('alsDistinct', intc(pr['distinct programmes']['ALS']))
+m('rulesShared', f"{pr['mean shared with the popularity top 5']['Association rules']:.2f}")
+m('rulesNews', pct(pr['category share Инфо']['Association rules'], 0))
+act = an['actual_shares']
+m('actWatched', pct(act['watched']))
+m('actTouched', pct(act['touched']))
+m('actNew', pct(act['new']))
+m('actNewRound', pct(act['new'], 0))
 
 # example users on S21
 ex = an['examples']
@@ -214,6 +266,12 @@ for u in ['A', 'B']:
     m(f'apHybrid{u}', f"{e['ap5']['Hybrid (LightGBM re-ranker)']:.2f}")
     m(f'apHS{u}', f"{e['ap5']['Habit x schedule']:.2f}")
     m(f'apPPR{u}', f"{e['ap5']['PPR']:.2f}")
+    hl = e['s21_lists']['Hybrid (LightGBM re-ranker)']
+    m(f'hybList{u}', ', '.join(str(p_) for p_, _, _ in hl))
+    m(f'hybHits{u}', NUM.get(sum(int(h_) for _, _, h_ in hl), 'no'))
+    hits_at = [i + 1 for i, (_, _, h_) in enumerate(hl) if h_]
+    m(f'hybHitRanks{u}', ', '.join(str(r_) for r_ in hits_at[:-1]) + (' and ' if len(hits_at) > 1 else '') + str(hits_at[-1]) if hits_at else 'none')
+    m(f'hybApFormula{u}', '(' + '+'.join(f'{j + 1}/{r_}' for j, r_ in enumerate(hits_at)) + ')/5' if hits_at else '0')
     short_fill = [k for k, n in e['filled_by_method'].items() if k != 'Popularity' and n < 5]
     m(f'fill{u}', 'every method filled all five places itself' if not short_fill else
       'the popularity fallback filled ' + ', '.join(f"{5 - e['filled_by_method'][k]} of the places of {k}" for k in short_fill))

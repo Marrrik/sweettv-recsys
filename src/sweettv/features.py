@@ -9,7 +9,10 @@ import pandas as pd
 import scipy.sparse as sp
 
 from . import baselines, target
-from .snapshot import FIRST_WEEK, WEEK, week_start
+from .snapshot import DAY, FIRST_WEEK, WEEK, week_start
+
+# cells per channel: hours of the week, or hours of the day pooled over weekdays
+PERIODS = {'week': 168, 'day': 24}
 
 
 def hour_of_week(sec):
@@ -18,10 +21,15 @@ def hour_of_week(sec):
     return ((hours // 24 + 3) % 7) * 24 + hours % 24
 
 
-def habit_matrix(views, snap, channels, last_weeks=None):
-    """Users x (channel, hour of week): share of that hour the user watched, averaged over the history weeks.
+def cell_of(sec, period='week'):
+    return hour_of_week(sec) if period == 'week' else (np.asarray(sec) // 3600) % 24
 
-    `last_weeks` restricts the history to the weeks just before the cutoff.
+
+def habit_matrix(views, snap, channels, last_weeks=None, period='week', half_life=None):
+    """Users x (channel, hour of week or of day): share of that hour the user watched, averaged over the history.
+
+    `last_weeks` restricts the history to the weeks just before the cutoff. `half_life` (weeks) weights recent hours
+    more, normalised so that a user who watches the hour every week still gets 1.
     """
     t1 = snap.t_cutoff
     weeks = snap.history_weeks if last_weeks is None else min(last_weeks, snap.history_weeks)
@@ -32,16 +40,70 @@ def habit_matrix(views, snap, channels, last_weeks=None):
     n = h1 - h0 + 1
     rep = np.repeat(np.arange(len(n)), n)
     hour = h0[rep] + np.arange(n.sum()) - np.repeat(np.cumsum(n) - n, n)
-    sec = np.minimum(e[rep], (hour + 1) * 3600) - np.maximum(s[rep], hour * 3600)
-    cell = channels.reindex(v.vsetv_id.to_numpy()[rep]).to_numpy() * 168 + hour_of_week(hour * 3600)
+    sec = (np.minimum(e[rep], (hour + 1) * 3600) - np.maximum(s[rep], hour * 3600)).astype(np.float64)
+    norm = float(weeks)
+    if half_life is not None:
+        sec *= 0.5 ** ((t1 - hour * 3600) / (half_life * WEEK))
+        norm = float((0.5 ** ((np.arange(weeks) + 0.5) / half_life)).sum())
+    if period == 'day':
+        norm *= 7
+    cells = PERIODS[period]
+    cell = channels.reindex(v.vsetv_id.to_numpy()[rep]).to_numpy() * cells + cell_of(hour * 3600, period)
     users = pd.Index(np.sort(v.user_id.unique()))
-    H = sp.csr_matrix((sec / (3600.0 * weeks), (users.get_indexer(v.user_id.to_numpy()[rep]), cell)),
-                      shape=(len(users), len(channels) * 168))
+    H = sp.csr_matrix((sec / (3600.0 * norm), (users.get_indexer(v.user_id.to_numpy()[rep]), cell)),
+                      shape=(len(users), len(channels) * cells))
     H.sum_duplicates()
     return users, H
 
 
-def coverage_matrix(slots, channels, items, weeks):
+def slot_hours(slots, channels, period='week'):
+    """Every (slot, hour) a slot overlaps: slot row, hour cell and the share of the slot inside that hour."""
+    st, en = slots.start.to_numpy(), slots.end.to_numpy()
+    h0, h1 = st // 3600, (en - 1) // 3600
+    n = h1 - h0 + 1
+    rep = np.repeat(np.arange(len(n)), n)
+    hour = h0[rep] + np.arange(n.sum()) - np.repeat(np.cumsum(n) - n, n)
+    share = (np.minimum(en[rep], (hour + 1) * 3600) - np.maximum(st[rep], hour * 3600)) / (en - st).clip(min=1)[rep]
+    cell = channels.reindex(slots.channel_id.to_numpy()[rep]).to_numpy() * PERIODS[period] + cell_of(hour * 3600, period)
+    return rep, cell, share
+
+
+def full_watch(users, H, channels, slots, items, weeks, period='week', min_share=0.25, batch=128):
+    """Expected fully watched airings per week, from the habit share of every hour an airing covers.
+
+    Watching 0.8 of an airing needs the user at the screen for almost all of its hours. For every airing the habit
+    shares of the hours holding at least `min_share` of it are combined in two ways: their minimum (the hours are
+    watched together) and their product (the hours are independent). Airings with the same set of hour cells are
+    grouped, so the work per user is one gather over the distinct sets. Returns two users x items arrays.
+    """
+    s = slots[slots.channel_id.isin(channels.index) & slots.tv_show_id.isin(items)].reset_index(drop=True)
+    rep, cell, share = slot_hours(s, channels, period)
+    keep = share >= min_share
+    keep[pd.Series(share).groupby(rep).idxmax().to_numpy()] = True
+    hours = pd.DataFrame({'slot': rep[keep], 'cell': cell[keep]}).sort_values(['slot', 'cell'])
+    pattern = hours.groupby('slot').cell.apply(tuple)
+    codes, uniq = pd.factorize(pattern)
+    pad = H.shape[1]
+    K = np.full((len(uniq), max(len(t) for t in uniq)), pad, dtype=np.int64)
+    for i, t in enumerate(uniq):
+        K[i, :len(t)] = t
+    KP = sp.csr_matrix((np.full(len(codes), 1.0 / weeks), (codes, items.get_indexer(s.tv_show_id.to_numpy()[pattern.index]))),
+                       shape=(len(uniq), len(items)))
+    KP.sum_duplicates()
+    KPT = KP.T.tocsr()
+    out_min = np.zeros((len(users), len(items)), dtype=np.float32)
+    out_prod = np.zeros((len(users), len(items)), dtype=np.float32)
+    for b0 in range(0, len(users), batch):
+        Hd = np.minimum(H[b0:b0 + batch].toarray().astype(np.float32), 1.0)
+        # the padding column is 1, neutral for both the minimum and the product
+        Hd = np.hstack([Hd, np.ones((Hd.shape[0], 1), dtype=np.float32)])
+        G = Hd[:, K]
+        out_min[b0:b0 + batch] = np.asarray(KPT @ G.min(axis=2).T).T
+        out_prod[b0:b0 + batch] = np.asarray(KPT @ np.exp(np.log(np.maximum(G, 1e-4)).sum(axis=2)).T).T
+    return out_min, out_prod
+
+
+def coverage_matrix(slots, channels, items, weeks, period='week'):
     """(channel, hour of week) x programmes, with every airing spread over the hours it covers.
 
     An airing adds, to each hour cell it overlaps, the share of its own length that falls into that hour, divided by
@@ -49,15 +111,9 @@ def coverage_matrix(slots, channels, items, weeks):
     that the user's usual viewing covers, which is what the 0.8 rule asks for.
     """
     s = slots[slots.channel_id.isin(channels.index) & slots.tv_show_id.isin(items)]
-    st, en = s.start.to_numpy(), s.end.to_numpy()
-    h0, h1 = st // 3600, (en - 1) // 3600
-    n = h1 - h0 + 1
-    rep = np.repeat(np.arange(len(n)), n)
-    hour = h0[rep] + np.arange(n.sum()) - np.repeat(np.cumsum(n) - n, n)
-    share = (np.minimum(en[rep], (hour + 1) * 3600) - np.maximum(st[rep], hour * 3600)) / (en - st).clip(min=1)[rep]
-    cell = channels.reindex(s.channel_id.to_numpy()[rep]).to_numpy() * 168 + hour_of_week(hour * 3600)
+    rep, cell, share = slot_hours(s, channels, period)
     G = sp.csr_matrix((share / weeks, (cell, items.get_indexer(s.tv_show_id.to_numpy()[rep]))),
-                      shape=(len(channels) * 168, len(items)))
+                      shape=(len(channels) * PERIODS[period], len(items)))
     G.sum_duplicates()
     return G
 
@@ -101,13 +157,18 @@ def _user_rank(df, col):
 
 
 COVERAGE_FEATURES = ['habit_cov', 'habit_cov_hist', 'habit_recent_cov', 'q_per_cov']
+EXTRA_FEATURES = ['fw_min', 'fw_prod', 'fwd_min', 'fwd_prod', 'fw_hist_min', 'q_per_fw', 'habit_day_cov', 'habit_rec_cov',
+                  'exposure_last4', 'rate_last4', 'win_early_ratio', 'rank_fw_min', 'rank_habit_rec_cov']
 
 
-def build(snap, views, users, cf_scores, fallback, prog, hs_half_life=10, hs_prior=30, n_cf=30, n_pop=50, coverage=False):
+def build(snap, views, users, cf_scores, fallback, prog, hs_half_life=10, hs_prior=30, n_cf=30, n_pop=50, coverage=False,
+          extra=False):
     """Candidate table with features and, when the snapshot has a target, the labels `y` and `freq_pw`.
 
     `coverage=True` adds COVERAGE_FEATURES: habit scores with every airing spread over the hours it covers, over the
-    whole history and over its last four weeks.
+    whole history and over its last four weeks. `extra=True` adds EXTRA_FEATURES: expected fully watched airings from
+    the minimum and the product of the habit over an airing's hours, weekday-pooled and recency-weighted habit, the
+    rate of fully watched airings in the last four weeks and the share of window airings in its first four weeks.
     """
     t1, hw, ww = snap.t_cutoff, snap.history_weeks, snap.window_weeks
     df = candidates(snap, users, cf_scores, fallback, n_cf, n_pop)
@@ -182,6 +243,35 @@ def build(snap, views, users, cf_scores, fallback, prog, hs_half_life=10, hs_pri
             df[col] = np.where(rows >= 0, dense[np.maximum(rows, 0), ii], np.nan)
             del dense
         df['q_per_cov'] = df.n_q / df.habit_cov_hist.clip(lower=1e-3)
+    if extra:
+        # expected fully watched airings from the habit of every hour an airing covers, weekly and weekday-pooled cells
+        hud, Hd = habit_matrix(views, snap, channels, period='day')
+        uid = hud.get_indexer(df.user_id)
+        for prefix, (uidx, rows, Hx, period) in {'fw': (hu, ui, H, 'week'), 'fwd': (hud, uid, Hd, 'day')}.items():
+            mn, pr = full_watch(uidx, Hx, channels, win, items, ww, period)
+            df[f'{prefix}_min'] = np.where(rows >= 0, mn[np.maximum(rows, 0), ii], np.nan)
+            df[f'{prefix}_prod'] = np.where(rows >= 0, pr[np.maximum(rows, 0), ii], np.nan)
+            del mn, pr
+        mn, _ = full_watch(hu, H, channels, snap.history_slots, items, hw, 'week')
+        df['fw_hist_min'] = np.where(ui >= 0, mn[np.maximum(ui, 0), ii], np.nan)
+        del mn
+        df['q_per_fw'] = df.n_q / df.fw_hist_min.clip(lower=1e-3)
+        dense = (Hd @ coverage_matrix(win, channels, items, ww, 'day')).toarray().astype(np.float32)
+        df['habit_day_cov'] = np.where(uid >= 0, dense[np.maximum(uid, 0), ii], np.nan)
+        hur, Hr = habit_matrix(views, snap, channels, half_life=4)
+        uir = hur.get_indexer(df.user_id)
+        dense = (Hr @ coverage_matrix(win, channels, items, ww)).toarray().astype(np.float32)
+        df['habit_rec_cov'] = np.where(uir >= 0, dense[np.maximum(uir, 0), ii], np.nan)
+        del dense
+        # fully watched airings over the airings the user could have seen, in the last four history weeks
+        t4 = t1 - 4 * WEEK
+        ex4 = baselines.exposure(tc, snap.history_slots[snap.history_slots.start >= t4],
+                                 snap.active_days[snap.active_days.day >= t4 // DAY], t1, None)
+        ex4 = ex4.groupby(['user_id', 'tv_show_id']).exposure.sum().rename('exposure_last4').reset_index()
+        df = df.merge(ex4, on=['user_id', 'tv_show_id'], how='left')
+        df['rate_last4'] = df.q_last4 / df.exposure_last4.clip(lower=1)
+        early = win[win.start < t1 + 4 * WEEK].groupby('tv_show_id').size() / 4
+        df['win_early_ratio'] = df.tv_show_id.map(early).fillna(0) / df.win_airings.clip(lower=1e-6)
 
     # programme popularity in the history and static attributes
     q = h[h.q > 0]
@@ -211,7 +301,7 @@ def build(snap, views, users, cf_scores, fallback, prog, hs_half_life=10, hs_pri
     # collaborative scores and within-user ranks
     for name, sc in cf_scores.items():
         df[f'cf_{name}'] = sc.lookup(df.user_id.to_numpy(), df.tv_show_id.to_numpy())
-    for col in ['hs', 'hs_p0', 'n_qw', 'habit_exposure'] + [f'cf_{n}' for n in cf_scores]:
+    for col in ['hs', 'hs_p0', 'n_qw', 'habit_exposure'] + [f'cf_{n}' for n in cf_scores] + (['fw_min', 'habit_rec_cov'] if extra else []):
         df[f'rank_{col}'] = _user_rank(df, col)
 
     if snap.target is not None:

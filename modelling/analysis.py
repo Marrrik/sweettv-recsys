@@ -52,7 +52,8 @@ score_tables = {
     'Content-based': cf.content(m, prog, sorted(s.pool)).long(s.pool, 50),
 }
 lists = {name: recs.top5(sc, users, fb, s.pool) for name, sc in score_tables.items()}
-lists['Hybrid (LightGBM re-ranker)'] = recs.read_submission(os.path.join(ROOT, 'modelling', 's21_ranker_v3_top5.csv'))
+FINAL = 'ranker_v4'  # the designated re-ranker round: its S21 lists and its test submission
+lists['Hybrid (LightGBM re-ranker)'] = recs.read_submission(os.path.join(ROOT, 'modelling', f's21_{FINAL}_top5.csv'))
 ap = pd.DataFrame({name: [target.apk(truth[u], lst[u]) for u in users] for name, lst in lists.items()}, index=users)
 print('MAP@5 on S21:', ap.mean().round(4).to_dict())
 
@@ -107,9 +108,11 @@ for name, lst in lists.items():
 props_df = pd.DataFrame(props).T
 display(props_df.round(4))
 tflat = truth.explode().astype('int64')
-print('actual targets: share watched at 0.8 before', round(np.mean([(int(u), int(p)) in q_pairs for u, p in tflat.items()]), 4),
-      '| share only touched before', round(np.mean([(int(u), int(p)) in t_pairs and (int(u), int(p)) not in q_pairs for u, p in tflat.items()]), 4),
-      '| share new to the user', round(np.mean([(int(u), int(p)) not in t_pairs for u, p in tflat.items()]), 4))
+actual = {'watched': float(np.mean([(int(u), int(p)) in q_pairs for u, p in tflat.items()])),
+          'touched': float(np.mean([(int(u), int(p)) in t_pairs and (int(u), int(p)) not in q_pairs for u, p in tflat.items()])),
+          'new': float(np.mean([(int(u), int(p)) not in t_pairs for u, p in tflat.items()]))}
+print('actual targets: share watched at 0.8 before', round(actual['watched'], 4), '| share only touched before',
+      round(actual['touched'], 4), '| share new to the user', round(actual['new'], 4))
 
 # %%
 # The two example users, chosen by the rule in the header
@@ -155,7 +158,7 @@ for label, u in [('A', user_a), ('B', user_b)]:
 # %%
 # The same two users in the test window: each method's submitted five programmes (no ground truth is available)
 sub_files = {'Popularity': 'popularity.csv', 'Habit x schedule': 'habit_schedule.csv', 'ALS': 'als.csv', 'PPR': 'ppr.csv',
-             'Association rules': 'rules.csv', 'Content-based': 'content.csv', 'Hybrid (LightGBM re-ranker)': 'ranker_v3.csv'}
+             'Association rules': 'rules.csv', 'Content-based': 'content.csv', 'Hybrid (LightGBM re-ranker)': f'{FINAL}.csv'}
 subs = {name: recs.read_submission(os.path.join(SUB_DIR, f)) for name, f in sub_files.items()}
 for label, u in [('A', user_a), ('B', user_b)]:
     rows_ = [{'method': name, 'rank': k + 1, 'tv_show_id': p, 'title': prog.title.get(p), 'category': prog.category.get(p)}
@@ -185,6 +188,7 @@ ids = {p for e in examples.values() for p in [x[0] for x in e['history_top']] + 
        + [x[0] for lst in e['s21_lists'].values() for x in lst] + [p for lst in e['s31_lists'].values() for p in lst]}
 examples['programmes'] = {int(p): {'title': prog.title.get(p), 'category': prog.category.get(p)} for p in sorted(ids)}
 with open(os.path.join(ROOT, 'modelling', 'analysis_results.json'), 'w', encoding='utf-8') as f:
-    json.dump({'map5': ap.mean().to_dict(), 'bootstrap': rows, 'segments': seg.to_dict(), 'properties': props_df.to_dict(),
-               'user_a': int(user_a), 'user_b': int(user_b), 'examples': examples}, f, indent=1, default=str, ensure_ascii=False)
+    json.dump({'final': FINAL, 'map5': ap.mean().to_dict(), 'bootstrap': rows, 'segments': seg.to_dict(), 'properties': props_df.to_dict(),
+               'actual_shares': actual, 'user_a': int(user_a), 'user_b': int(user_b), 'examples': examples},
+              f, indent=1, default=str, ensure_ascii=False)
 print(f'total runtime {time.time() - T0:.0f}s')
